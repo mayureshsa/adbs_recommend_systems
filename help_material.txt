@@ -1,3 +1,7 @@
-#References:
+MongoDB details:
+Database name - adbs2019 (localhost:27017)
+Collection name - course_catalog (as of now 26Feb2019, 1953)
+
+#Links:
 How to insert data from Python to MongoDB: https://www.geeksforgeeks.org/mongodb-python-insert-update-data/
 How to use dictionaries in Python: https://www.programiz.com/python-programming/dictionary
