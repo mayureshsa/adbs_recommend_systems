@@ -1,0 +1,14 @@
+[
+  {
+  "name": "University of Tromsø",
+    "courses": [
+      "Artificial Intelligence"
+    ]
+  },
+  {
+  "name": "University of Oslo",
+    "courses": [
+      "Distributed Systems"
+    ]
+  }
+]
