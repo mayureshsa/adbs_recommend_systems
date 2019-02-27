@@ -1,14 +1,75 @@
-[
-  {
-    "name": "University of Tromsø",
-    "courses": [
-      "Artificial Intelligence"
-    ]
-  },
-  {
-    "name": "University of Oslo",
-    "courses": [
-      "Distributed Systems"
-    ]
-  }
-]
+[{
+  "university": "University of Tromsø",
+  "course":[
+    {
+      "_id": "INF-3792",
+      "course_name": "Medical Informatics",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "INF-3795",
+      "course_name": "Advanced telemedicine and e-health systems",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "INF-3910",
+      "course_name": "Advanced telemedicine and e-health systems",
+      "course_semester": "Spring2019"
+    }
+  ]
+},
+{
+  "university": "University of Oslo",
+  "course":[
+    {
+      "_id": "IN4080",
+      "course_name": "Natural Language Processing",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "IN5020",
+      "course_name": "Distributed Systems",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "IN5290",
+      "course_name": "Ethical Hacking",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "INF5013NSA",
+      "course_name": "Cyberethics",
+      "course_semester": "Autumn2019"
+    },
+    {
+      "_id": "IN5520",
+      "course_name": "Digital Image Analysis",
+      "course_semester": "Autumn2019"
+    }
+  ]
+},
+{
+  "university": "NTNU",
+  "course":[
+    {
+      "_id": "IT2805",
+      "course_name": "Web Technologies",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "T3105",
+      "course_name": "Artificial Intelligence Programming",
+      "course_semester": "Spring2019"
+    },
+    {
+      "_id": "IMT3601",
+      "course_name": "Game Programming",
+      "course_semester": "Autumn2019"
+    },
+    {
+      "_id": "IMT2681",
+      "course_name": "Cloud Technologies",
+      "course_semester": "Autumn2019"
+    }
+  ]
+}]

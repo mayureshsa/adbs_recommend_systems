@@ -1,18 +1,8 @@
-#import requests
-#from pprint import pprint
 from faker import Faker
 from pymongo import MongoClient
 import uuid
 import random
 import json
-
-
-# constants for Coursera API
-# BASE_URL = "https://api.coursera.org/api/catalog.v1/courses"
-#FIELDS = 'shortName, name,language,largeIcon,photo,previewLink,shortDescription,smallIcon,subtitleLanguagesCsv,isTranslate,universityLogo,video,videoId,aboutTheCourse,targetAudience,faq,courseSyllabus,courseFormat,suggestedReadings,instructor,estimatedClassWorkload,aboutTheInstructor,sessions.fields(durationString,name,eligibleForCertificates,startDay,startMonth,startYear,active,status),instructors.fields(photo,bio,fullName,title,department,website,websiteTwitter),universities.fields(description,homeLink,location,website,websiteTwitter,logo),categories.fields(name,shortName,description)'
-#INCLUDES = 'universities,categories,instructors,sessions'
-#Q = 'search'
-#QUERY = 'computer science'
 
 # MongoClient
 try:
@@ -21,11 +11,6 @@ try:
 except:
     print("Could not connect to MongoDB")
 
-# connect to the MongoDB: adbs2019)
-db = conn.adbs2019
-
-# Create or Switch to collection name: course_catalog
-collection = db.course_catalog
 
 fake = Faker()
 
@@ -109,64 +94,59 @@ fake = Faker()
 # 	return courses, categories, universities, instructors
 # =============================================================================
 
-def find_by_id(l, id):
- 	for el in l:
- 		if el['id'] == id:
- 			return el
 
 def find_random_course_id():
- 	course = db.course.find().limit(1).skip( int(random.random() * db.course.count()) )[0]
+ 	course = db.course_catalog.find().limit(1).skip(int(random.random() * db.course_catalog.count()))[0]
  	return course['_id']
-
-def filter_english_courses(ls):
- 	c = []
- 	for l in ls:
- 		if l.get('language', None) == 'en':
- 			c.append(l)
- 	return c
 
 def new_student():
 	student = {}
 	student['_id'] = str(uuid.uuid1())
 	student['name'] = fake.name()
 	student['address'] = fake.address()
-	student['bio'] = fake.text()
-	student['company'] = fake.company()
-	student['job'] = fake.job()
 	student['phone'] = fake.phone_number()
 	return student
+#
+def add_fake_students(num=5, d=2):
+  students = []
+  student_sessions = []
 
-def generate_fake_students(num=500, d=17):
-	students = []
-	student_sessions = []
+  print("Inserting " + str(num) + " students with up to " + str(d) + " courses taken per student.")
 
-	print("Inserting " + str(num) + " students with up to " + str(d) + " courses taken per student.")
-	for i in range(num):
-		students.append(new_student())
-	for s in students:
-		for e in range(int(random.random() * d)):
-			session = {}
-			session['student_id'] = s['_id']
-			session['course_id'] = find_random_course_id()
-			session['date_completed'] = fake.date_time()
-			session['grade'] = fake.word()
-			student_sessions.append(session)
-	return students, student_sessions
+  my_grade_list = ['A','B','C','D','E','F']
 
+  for i in range(num):
+    students.append(new_student())
+    for s in students:
+      for e in range(int(random.random() * d)):
+        session = {}
+        session['student_id'] = s['_id']
+        session['course_id'] = find_random_course_id()
+        session['date_completed'] = fake.date_time()
+        session['grade'] = fake.word(my_grade_list)
+        student_sessions.append(session)
+        return students, student_sessions
+#
 def insert_mongo(docs, collection_name):
 	collection = db[collection_name]
-	collection.insert(docs)
+	collection.insert_many(docs)
 
 if __name__ == "__main__":
-#courses, categories, universities, instructors = fetch_courses()
-#insert_mongo(courses, "course")
-  students, courses_taken = generate_fake_students()
+
+  # connect to the MongoDB: adbs2019)
+  db = conn.adbs2019
+
+  # defining dictionary to store the json input
+  course_dict=[]
+  with open('data.json') as f:
+    course_dict = json.load(f)
+
+  # Inserting dictionary to MongoDB
+  insert_mongo(course_dict, "course_catalog")
+
+  # Creating fake students
+  students, courses_taken = add_fake_students()
+
+  # Inserting fake students to MongoDB
   insert_mongo(students, "student")
   insert_mongo(courses_taken, "course_taken")
-  # defining dictionary to store the json input
-  data=[]
-  with open('data.json') as f:
-    data = json.load(f)
-  # Inserting dictionary to MongoDB
-  rec_data = collection.insert_many(data)
-  print("Data inserted with record ids",rec_data)
