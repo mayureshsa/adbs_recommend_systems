@@ -11,6 +11,15 @@ try:
 except:
     print("Could not connect to MongoDB")
 
+# MongoClient
+db = MongoClient('mongodb://localhost:27017')['adbs2019']
+db.drop_collection('course')
+db.drop_collection('category')
+db.drop_collection('session')
+db.drop_collection('instructor')
+db.drop_collection('university')
+db.drop_collection('student')
+db.drop_collection('course_taken')
 
 fake = Faker()
 
@@ -96,7 +105,7 @@ fake = Faker()
 
 
 def find_random_course_id():
- 	course = db.course_catalog.find().limit(1).skip(int(random.random() * db.course_catalog.count()))[0]
+ 	course = db.adbs2019.find().limit(1).skip(int(random.random() * db.adbs2019.count()))[0]
  	return course['_id']
 
 def new_student():
@@ -132,21 +141,27 @@ def insert_mongo(docs, collection_name):
 	collection.insert_many(docs)
 
 if __name__ == "__main__":
+  courses = []
 
   # connect to the MongoDB: adbs2019)
   db = conn.adbs2019
 
   # defining dictionary to store the json input
-  course_dict=[]
+  #university_dic=[]
   with open('data.json') as f:
-    course_dict = json.load(f)
+    university_dic = json.load(f)
+    #course_dict = json.load(f)
+
+  for university in university_dic['universities']:
+    for course in university['course']:
+      courses.append(course['course_name'])
 
   # Inserting dictionary to MongoDB
-  insert_mongo(course_dict, "course_catalog")
+  #insert_mongo(courses, "courses")
 
   # Creating fake students
-  students, courses_taken = add_fake_students()
+  #students, courses_taken = add_fake_students()
 
   # Inserting fake students to MongoDB
-  insert_mongo(students, "student")
-  insert_mongo(courses_taken, "course_taken")
+  #insert_mongo(students, "student")
+  #insert_mongo(courses_taken, "course_taken")
