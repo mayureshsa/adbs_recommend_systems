@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import uuid
 import random
 import json
+from bson import json_util
 
 # MongoClient
 try:
@@ -141,24 +142,15 @@ def insert_mongo(docs, collection_name):
 	collection.insert_many(docs)
 
 if __name__ == "__main__":
-  courses = []
 
   # connect to the MongoDB: adbs2019)
   db = conn.adbs2019
 
-  # defining dictionary to store the json input
-  #university_dic=[]
-  with open('data.json') as f:
-    university_dic = json.load(f)
-    #course_dict = json.load(f)
-
-  for university in university_dic['universities']:
-    for course in university['course']:
-      courses.append(course['course_name'])
-
-  # Inserting dictionary to MongoDB
-  #insert_mongo(courses, "courses")
-
+  # Inserting courses
+  with open('courses.json') as f:
+    courses_dic = json.load(f)
+    insert_mongo(courses_dic, "course")
+  
   # Creating fake students
   #students, courses_taken = add_fake_students()
 

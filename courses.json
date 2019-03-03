@@ -1,0 +1,86 @@
+[
+    {
+    "_id": "1",
+    "course_code": "INF-3792",
+    "university": "University of Tromsø",
+    "course_name": "Medical Informatics",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "2",
+    "course_code": "INF-3795",
+    "university": "University of Tromsø",
+    "course_name": "Advanced telemedicine and e-health systems",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "3",
+    "course_code": "INF-3910",
+    "university": "University of Tromsø",
+    "course_name": "Advanced telemedicine and e-health systems",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "4",
+    "course_code": "IN4080",
+    "university": "University of Oslo",
+    "course_name": "Natural Language Processing",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "5",
+    "course_code": "IN5020",
+    "university": "University of Oslo",
+    "course_name": "Distributed Systems",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "6",
+    "course_code": "IN5290",
+    "university": "University of Oslo",
+    "course_name": "Ethical Hacking",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "7",
+    "course_code": "INF5013NSA",
+    "university": "University of Oslo",
+    "course_name": "Cyberethics",
+    "course_semester": "Autumn2019"
+    },
+    {
+    "_id": "8",
+    "course_code": "IN5520",
+    "university": "University of Oslo",
+    "course_name": "Digital Image Analysis",
+    "course_semester": "Autumn2019"
+    },
+    {
+    "_id": "9",
+    "course_code": "IT2805",
+    "university": "NTNU",
+    "course_name": "Web Technologies",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "10",
+    "course_code": "T3105",
+    "university": "NTNU",
+    "course_name": "Artificial Intelligence Programming",
+    "course_semester": "Spring2019"
+    },
+    {
+    "_id": "11",
+    "course_code": "IMT3601",
+    "university": "NTNU",
+    "course_name": "Game Programming",
+    "course_semester": "Autumn2019"
+    },
+    {
+    "_id": "12",
+    "course_code": "IMT2681",
+    "university": "NTNU",
+    "course_name": "Cloud Technologies",
+    "course_semester": "Autumn2019"
+    }
+]
