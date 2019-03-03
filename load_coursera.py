@@ -135,7 +135,8 @@ def add_fake_students(num=5, d=2):
         session['date_completed'] = fake.date_time()
         session['grade'] = fake.word(my_grade_list)
         student_sessions.append(session)
-        return students, student_sessions
+  
+  return students, student_sessions
 #
 def insert_mongo(docs, collection_name):
 	collection = db[collection_name]
