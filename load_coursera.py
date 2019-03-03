@@ -106,7 +106,7 @@ fake = Faker()
 
 
 def find_random_course_id():
- 	course = db.adbs2019.find().limit(1).skip(int(random.random() * db.adbs2019.count()))[0]
+ 	course = db.course.find().limit(1).skip(int(random.random() * db.course.count()))[0]
  	return course['_id']
 
 def new_student():
@@ -152,8 +152,8 @@ if __name__ == "__main__":
     insert_mongo(courses_dic, "course")
   
   # Creating fake students
-  #students, courses_taken = add_fake_students()
+  students, courses_taken = add_fake_students()
 
   # Inserting fake students to MongoDB
-  #insert_mongo(students, "student")
-  #insert_mongo(courses_taken, "course_taken")
+  insert_mongo(students, "student")
+  insert_mongo(courses_taken, "course_taken")
