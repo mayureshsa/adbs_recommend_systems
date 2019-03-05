@@ -7,13 +7,13 @@ from bson import json_util
 
 # MongoClient
 try:
-    conn = MongoClient('mongodb://localhost:27017')
+    conn = MongoClient('mongodb://localhost:27020')
     print("Connected successfully!!!")
 except:
     print("Could not connect to MongoDB")
 
 # MongoClient
-db = MongoClient('mongodb://localhost:27017')['adbs2019']
+db = MongoClient('mongodb://localhost:27020')['adbs2019']
 db.drop_collection('course')
 db.drop_collection('category')
 db.drop_collection('session')
@@ -106,8 +106,7 @@ fake = Faker()
 
 
 def find_random_course_id():
- 	course = db.course.find().limit(1).skip(int(random.random() * db.course.count()))[0]
- 	return course['_id']
+   	return db.course.find().limit(1).skip(int(random.random() * db.course.estimated_document_count()))[0]['_id']
 
 def new_student():
 	student = {}
@@ -135,7 +134,6 @@ def add_fake_students(num=5, d=2):
         session['date_completed'] = fake.date_time()
         session['grade'] = fake.word(my_grade_list)
         student_sessions.append(session)
-  
   return students, student_sessions
 #
 def insert_mongo(docs, collection_name):
@@ -151,7 +149,7 @@ if __name__ == "__main__":
   with open('courses.json') as f:
     courses_dic = json.load(f)
     insert_mongo(courses_dic, "course")
-  
+
   # Creating fake students
   students, courses_taken = add_fake_students()
 
