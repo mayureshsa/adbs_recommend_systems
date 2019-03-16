@@ -3,17 +3,20 @@ from pymongo import MongoClient
 import uuid
 import random
 import json
-from bson import json_util
+#import pymongo
+from pymongo.errors import BulkWriteError
+
+from random import randint
 
 # MongoClient
 try:
-    conn = MongoClient('mongodb://localhost:27020')
+    conn = MongoClient('mongodb://localhost:27017')
     print("Connected successfully!!!")
 except:
     print("Could not connect to MongoDB")
 
 # MongoClient
-db = MongoClient('mongodb://localhost:27020')['adbs2019']
+db = MongoClient('mongodb://localhost:27017')['adbs2019']
 db.drop_collection('course')
 db.drop_collection('category')
 db.drop_collection('session')
@@ -110,17 +113,16 @@ def find_random_course_id():
 
 def new_student():
 	student = {}
-	student['_id'] = str(uuid.uuid1())
+	student['_id'] = str(randint(50,100))
 	student['name'] = fake.name()
 	student['address'] = fake.address()
 	student['phone'] = fake.phone_number()
 	return student
-#
+
+
 def add_fake_students(num=5, d=2):
   students = []
   student_sessions = []
-
-  print("Inserting " + str(num) + " students with up to " + str(d) + " courses taken per student.")
 
   my_grade_list = ['A','B','C','D','E','F']
 
@@ -130,12 +132,12 @@ def add_fake_students(num=5, d=2):
       for e in range(int(random.random() * d)):
         session = {}
         session['student_id'] = s['_id']
-        session['course_id'] = find_random_course_id()
-        session['date_completed'] = fake.date_time()
-        session['grade'] = fake.word(my_grade_list)
+        session['student_name'] = s['name']
+        session['course_id'] = courses_dic[randint(0,len(courses_dic)-1)]['_id']
         student_sessions.append(session)
   return students, student_sessions
-#
+
+
 def insert_mongo(docs, collection_name):
 	collection = db[collection_name]
 	collection.insert_many(docs)
@@ -151,8 +153,12 @@ if __name__ == "__main__":
     insert_mongo(courses_dic, "course")
 
   # Creating fake students
-  students, courses_taken = add_fake_students()
+  students, course_taken = add_fake_students()
 
   # Inserting fake students to MongoDB
-  insert_mongo(students, "student")
-  insert_mongo(courses_taken, "course_taken")
+  try:
+    insert_mongo(students, "student")
+    insert_mongo(course_taken, "course_taken")
+  except BulkWriteError as exc:
+    print ("%%%%% Insertion Unsuccessful %%%%")
+    print (exc.details)

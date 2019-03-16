@@ -1,0 +1,8 @@
+2019-03-04 10:53:15,342 [ALWAYS] mongo_connector.connector:50 - Starting mongo-connector version: 3.1.1
+2019-03-04 10:53:15,342 [ALWAYS] mongo_connector.connector:50 - Python version: 3.7.1 (default, Dec 10 2018, 22:54:23) [MSC v.1915 64 bit (AMD64)]
+2019-03-04 10:53:15,343 [ALWAYS] mongo_connector.connector:50 - Platform: Windows-10-10.0.17763-SP0
+2019-03-04 10:53:15,344 [ALWAYS] mongo_connector.connector:50 - pymongo version: 3.7.2
+2019-03-04 10:53:15,344 [WARNING] mongo_connector.connector:170 - MongoConnector: Can't find D:\UiT\Semester 2\Adv. Database Systems\adbs_recommend_systems\oplog.timestamp, attempting to create an empty progress log
+2019-03-04 10:53:15,359 [ALWAYS] mongo_connector.connector:50 - Source MongoDB version: 4.0.6
+2019-03-04 10:53:15,360 [ALWAYS] mongo_connector.connector:50 - Target DocManager: mongo_connector.doc_managers.neo4j_doc_manager version: unknown
+2019-03-04 10:53:15,361 [ERROR] mongo_connector.connector:383 - No replica set at "localhost:27017"! A replica set is required to run mongo-connector. Shutting down...
