@@ -134,6 +134,7 @@ def add_fake_students(num=5, d=2):
         session['student_id'] = s['_id']
         session['student_name'] = s['name']
         session['course_id'] = courses_dic[randint(0,len(courses_dic)-1)]['_id']
+        session['grade'] = random.choice(my_grade_list)
         student_sessions.append(session)
   return students, student_sessions
 
