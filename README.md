@@ -54,7 +54,7 @@ Example:
 }
 ~~~
 ## Neo4j graph structure
-![alt text](shorturl.at/muDI5)
+![alt text](https://github.com/mayureshsa/adbs_recommend_systems/blob/master/neo4j_graph.svg)
 
 ## Note
 
