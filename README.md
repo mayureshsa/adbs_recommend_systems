@@ -1,4 +1,4 @@
-## CourseCatalog
+## Course Recommendation System
 
 A simple python script to save sample course catalog data to MongoDB.
 
